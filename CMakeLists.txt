@@ -1,19 +1,24 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.28)
 
-# Set some basic project attributes
-project (cpp_callbacks_cmake)
+project(callbackmanager C CXX ASM)
 
+# GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 26)
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,-allow-multiple-definition")
 
-# This project will output an executable file
-add_executable(${PROJECT_NAME} 
-	callbackmanager.cpp
-	callback_function_template_args.cpp )
+add_executable(${CMAKE_PROJECT_NAME})
+target_sources(${CMAKE_PROJECT_NAME}
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/example/callback_examples.cpp
+)
+target_sources(${CMAKE_PROJECT_NAME}
+        PUBLIC
+        FILE_SET cxx_modules TYPE CXX_MODULES FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/callbackmanager.cpp
+)
 
-# Create a simple configuration header
-configure_file(config.h.in config.h)
+target_link_libraries( ${CMAKE_PROJECT_NAME}
+)
 
-# Include the configuration header in the build
-target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_BINARY_DIR}")
