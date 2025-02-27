@@ -88,8 +88,9 @@ TEST(callback, voidWithoutParameters) {
     });
     try {
         cb.call();
-    } catch (std::bad_function_call e) {
-        std::cout << e.what();
+    } catch (...) {
+        std::exception_ptr ex = std::current_exception();
+        std::cout << ex.__cxa_exception_type() << std::endl;
     }
     ASSERT_TRUE(called);
 }
