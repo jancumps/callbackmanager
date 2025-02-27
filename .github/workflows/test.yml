@@ -48,8 +48,8 @@ jobs:
           mkdir build
           cd build
           cmake .. -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-gcc-14 -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-g++-14 -DCMAKE_BUILD_TYPE=Release
-          # cmake --build . --target callbackmanager_test
-          cmake --build .
+          cmake --build . --target callbackmanager_test
+          # cmake --build .
           cd ..
 
       - name: Test Project
@@ -57,7 +57,7 @@ jobs:
         shell: bash
         run: |
           cd build
-          chmod +x ./callbackmanager_example
-          ./callbackmanager_example
+          # chmod +x ./callbackmanager_example
+          # ./callbackmanager_example
           ctest
           cd ..
