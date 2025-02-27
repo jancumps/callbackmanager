@@ -58,6 +58,6 @@ jobs:
         run: |
           cd build
           chmod +x ./callbackmanager_example
-          ./callbackmanager_exampe
+          ./callbackmanager_example
           ctest
           cd ..
