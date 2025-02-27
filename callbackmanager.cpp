@@ -17,7 +17,10 @@
   requires std::is_void<R>::value || std::is_arithmetic_v<R>
 class Callback {
 public:
-	Callback() : callback_(nullptr){}
+    Callback() : callback_(nullptr){}
+    virtual ~Callback() {
+		unset();
+	}
 
 	inline void set(std::function<R(Args... args)> callback) {
 	    callback_ = & callback;
