@@ -86,7 +86,11 @@ TEST(callback, voidWithoutParameters) {
         called = true;
         return;
     });
-    cb.call();
+    try {
+        cb.call();
+    } catch (std::bad_function_call e) {
+        std::cout << e.what();
+    }
     ASSERT_TRUE(called);
 }
 
