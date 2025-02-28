@@ -48,9 +48,9 @@ jobs:
           mkdir build
           cd build
           # cmake .. -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-gcc-14 -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-g++-14 -DCMAKE_BUILD_TYPE=Release
-          cmake .. --trace-expand -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-gcc-14 -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-g++-14 -DCMAKE_BUILD_TYPE=Debug
+          cmake .. --debug-output -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-gcc-14 -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/x86_64-linux-gnu-g++-14 -DCMAKE_BUILD_TYPE=Debug
           # cmake --build . --target callbackmanager_test
-          cmake --build --trace-expand .
+          cmake --build --debug-output .
           cd ..
 
       - name: Test Project
