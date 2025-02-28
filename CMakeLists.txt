@@ -8,6 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,-allow-multiple-definition")
 
+set(CMAKE_CXX_FLAGS_RELEASE "-g")
+# this is most likely a flaw in my callbackmanage class. Optimiser prunes callback methods
+# except with the -g options and no optimisation (either nbo -O or -O0)
+# https://github.com/jancumps/callbackmanager/issues/2
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
