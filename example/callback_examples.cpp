@@ -33,7 +33,7 @@ int main() {
 
     callbackmanager::Callback<int, const int&, const int&> cb;
     // Use a lambda to capture myClass and call the object method
-    cb.set([&myClass](const int& num1, const int& num2) -> int {
+    cb.set([&myClass](const int& num1, const int& num2) -> int const {
         return myClass.handler(num1, num2);
     });
 
