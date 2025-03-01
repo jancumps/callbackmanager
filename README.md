@@ -1,6 +1,10 @@
 # callbackmanager
 C++ callback manager supports classic C function, a lambda, a static class method or an object method as handler
 
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+![GitHub License](https://img.shields.io/github/license/jancumps/pico_gps_teseo?label=licence)
+[![run unit tests of the callbackmanager](https://github.com/jancumps/callbackmanager/actions/workflows/test.yml/badge.svg)](https://github.com/jancumps/callbackmanager/actions/workflows/test.yml)
+
 This callback manager can execute a method of a particular object as a callback. 
 It can be used in typical callback situations, e.g.: in a UART driver. But also in interrupt handlers.
 
