@@ -20,9 +20,8 @@ public:
 int functionHandler(const int& num1, const int& num2) {
     return num1 + num2;
 }
-
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
+ 
+__attribute__((optimize(0))) 
 int main() {
 
     int a = 4;
@@ -143,4 +142,4 @@ int main() {
 */
 
 }
-#pragma GCC pop_options
+
