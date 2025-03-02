@@ -114,7 +114,7 @@ int main() {
 	callbackmanager::Callback<void, const std::string&> cb;
     // Use a lambda to execute anonymous C code
     cb.set([](const std::string& s) {
-        printf(s.c_str());
+        printf("%s", s.c_str());
     	fflush(stdout);
         return;
     });
@@ -130,7 +130,7 @@ int main() {
         return;
     });
     cb.call(updateme);
-    printf(updateme.c_str());
+    printf("%s", updateme.c_str());
 	fflush(stdout);
 	}
 
