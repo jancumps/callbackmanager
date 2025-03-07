@@ -18,7 +18,7 @@
 class Callback {
 	using callbackfunction_t = std::function<R(Args...)>;	
 public:
-	Callback() : callback_(), isSet(false){}
+	Callback() : callback_(nullptr), isSet(false){}
 
 	inline void set(callbackfunction_t callback) {
 	    callback_ = callback;
@@ -26,6 +26,7 @@ public:
 	}
 
 	inline void unset() {
+		callback_ = nullptr;
 		isSet = false;
 	}
 
