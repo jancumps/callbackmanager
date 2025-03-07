@@ -2,8 +2,6 @@
 
 import callbackmanager;
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: call object method
 TEST(callback, objectMethod) {
     class MyClass {
@@ -23,10 +21,7 @@ TEST(callback, objectMethod) {
     ASSERT_EQ(cb.call(4, 5), 9);
     ASSERT_NE(cb.call(4, 5), 8);
 }
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: call static method
 TEST(callback, classStaticMethod) {
     class MyClass {
@@ -44,10 +39,7 @@ TEST(callback, classStaticMethod) {
     ASSERT_EQ(cb.call(4, 5), 9);
     ASSERT_NE(cb.call(4, 5), 8);
 }
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: call C function
 int functionHandler(const int& num1, const int& num2) {
     return num1 + num2;
@@ -62,10 +54,7 @@ TEST(callback, cFunction) {
     ASSERT_EQ(cb.call(4, 5), 9);
     ASSERT_NE(cb.call(4, 5), 8);
 }
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: call pure lambda
 TEST(callback, lambda) {
 	callbackmanager::Callback<int, const int&, const int&> cb;
@@ -76,10 +65,7 @@ TEST(callback, lambda) {
     ASSERT_EQ(cb.call(4, 5), 9);
     ASSERT_NE(cb.call(4, 5), 8);
 }
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: return a bool
 TEST(callback, bool) {
 	callbackmanager::Callback<bool, const int&, const int&> cb;
@@ -90,10 +76,7 @@ TEST(callback, bool) {
 	ASSERT_TRUE(cb.call(1, 1));
 	ASSERT_FALSE(cb.call(1, 2));
 }
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: use void, and no attributes
 TEST(callback, voidWithoutParameters) {
 	callbackmanager::Callback<void> cb;
@@ -106,10 +89,7 @@ TEST(callback, voidWithoutParameters) {
     cb.call();
     ASSERT_TRUE(called);
 }
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: use void, and a const std::string reference
 TEST(callback, voidWithConstParameter) {
     callbackmanager::Callback<void, const std::string&> cb;
@@ -120,10 +100,7 @@ TEST(callback, voidWithConstParameter) {
     });
     cb.call("test");
 }    
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: no handler
 TEST(callback, noHandler) {
 	callbackmanager::Callback<void> cb;
@@ -131,10 +108,7 @@ TEST(callback, noHandler) {
     cb.call();
     ASSERT_TRUE(true); // call without callback should succeed
 }    
-#pragma GCC pop_options
 
-#pragma GCC push_options
-#pragma GCC optimize("O0")  
 // scenario: set and unset
 TEST(callback, setUnset) {
 	callbackmanager::Callback<void> cb;
@@ -147,4 +121,3 @@ TEST(callback, setUnset) {
     cb.unset();
     ASSERT_FALSE(cb.is_set());
 }
-#pragma GCC pop_options
