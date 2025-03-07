@@ -16,15 +16,18 @@
  export template <typename R, typename... Args>
   requires std::is_void<R>::value || std::is_arithmetic_v<R>
 class Callback {
+	using callbackfunction_t = std::function<R(Args...)>;	
 public:
-	Callback() : callback_(nullptr){}
+	Callback() : callback_(nullptr), isSet(false){}
 
-	inline void set(std::function<R(Args... args)> callback) {
-	    callback_ = & callback;
+	inline void set(callbackfunction_t callback) {
+	    callback_ = callback;
+		isSet = true;
 	}
 
 	inline void unset() {
-	    callback_ = nullptr;
+		callback_ = nullptr;
+		isSet = false;
 	}
 
 	/*
@@ -32,26 +35,27 @@ public:
 	 */
 	inline R call(Args... args) {
 		if constexpr (std::is_void<R>::value) {
-			if (callback_ == nullptr) {
+			if (!isSet) {
 				return;
 			}
-			(*callback_)(args...);
+			(callback_)(args...);
 		}
 
 		if constexpr (! std::is_void<R>::value) {
-			if (callback_ == nullptr) {
+			if (!isSet) {
 				return 0; // R can only be a arithmetic type. 0 should work as default.
 			}
-			return (*callback_)(args...);
+			return (callback_)(args...);
 		}
 	}
 
 	inline bool is_set() {
-		return (callback_ != nullptr);		
+		return isSet;		
 	}
 
 private:
-	std::function<R(Args... args)> *callback_;
+	callbackfunction_t callback_;
+	bool isSet;
 };
 
 } // namespace callbackmanager

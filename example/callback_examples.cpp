@@ -21,7 +21,6 @@ int functionHandler(const int& num1, const int& num2) {
     return num1 + num2;
 }
  
-__attribute__((optimize(0))) 
 int main() {
 
     int a = 4;
