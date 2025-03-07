@@ -16,10 +16,11 @@
  export template <typename R, typename... Args>
   requires std::is_void<R>::value || std::is_arithmetic_v<R>
 class Callback {
+	using callbackfunction_t = std::function<R(Args...)>;	
 public:
 	Callback() : callback_(nullptr){}
 
-	inline void set(std::function<R(Args... args)> callback) {
+	inline void set(callbackfunction_t callback) {
 	    callback_ = & callback;
 	}
 
@@ -51,7 +52,7 @@ public:
 	}
 
 private:
-	std::function<R(Args... args)> *callback_;
+	callbackfunction_t *callback_;
 };
 
 } // namespace callbackmanager
