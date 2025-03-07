@@ -18,15 +18,14 @@
 class Callback {
 	using callbackfunction_t = std::function<R(Args...)>;	
 public:
-	Callback() : callback_(nullptr), isSet(false){}
+	Callback() : callback_(), isSet(false){}
 
 	inline void set(callbackfunction_t callback) {
-	    callback_ = & callback;
+	    callback_ = callback;
 		isSet = true;
 	}
 
 	inline void unset() {
-	    callback_ = nullptr;
 		isSet = false;
 	}
 
@@ -38,14 +37,14 @@ public:
 			if (!isSet) {
 				return;
 			}
-			(*callback_)(args...);
+			(callback_)(args...);
 		}
 
 		if constexpr (! std::is_void<R>::value) {
 			if (!isSet) {
 				return 0; // R can only be a arithmetic type. 0 should work as default.
 			}
-			return (*callback_)(args...);
+			return (callback_)(args...);
 		}
 	}
 
@@ -54,7 +53,7 @@ public:
 	}
 
 private:
-	callbackfunction_t *callback_;
+	callbackfunction_t callback_;
 	bool isSet;
 };
 
