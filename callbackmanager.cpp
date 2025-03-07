@@ -18,16 +18,16 @@
 class Callback {
 	using callbackfunction_t = std::function<R(Args...)>;	
 public:
-	Callback() : callback_(nullptr), isSet(false){}
+	Callback() : callback_(nullptr), is_callback_set(false){}
 
 	inline void set(callbackfunction_t callback) {
 	    callback_ = callback;
-		isSet = true;
+		is_callback_set = true;
 	}
 
 	inline void unset() {
 		callback_ = nullptr;
-		isSet = false;
+		is_callback_set = false;
 	}
 
 	/*
@@ -35,14 +35,14 @@ public:
 	 */
 	inline R call(Args... args) {
 		if constexpr (std::is_void<R>::value) {
-			if (!isSet) {
+			if (!is_callback_set) {
 				return;
 			}
 			(callback_)(args...);
 		}
 
 		if constexpr (! std::is_void<R>::value) {
-			if (!isSet) {
+			if (!is_callback_set) {
 				return 0; // R can only be a arithmetic type. 0 should work as default.
 			}
 			return (callback_)(args...);
@@ -50,12 +50,12 @@ public:
 	}
 
 	inline bool is_set() {
-		return isSet;		
+		return is_callback_set;		
 	}
 
 private:
 	callbackfunction_t callback_;
-	bool isSet;
+	bool is_callback_set;
 };
 
 } // namespace callbackmanager
