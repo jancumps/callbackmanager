@@ -6,14 +6,15 @@ C++ callback manager supports classic C function, a lambda, a static class metho
 [![run unit tests](https://github.com/jancumps/callbackmanager/actions/workflows/test.yml/badge.svg)](https://github.com/jancumps/callbackmanager/actions/workflows/test.yml)
 
 This callback manager can execute a method of a particular object as a callback. 
-It can be used in typical callback situations, e.g.: in a UART driver. But also in interrupt handlers.
+It can be used in typical callback situations, e.g.: in a UART driver or a GUI framework. But also in interrupt handlers.
 
 - lightweight: small runtime cost, low firmware hit. Can be used for tiny embedded systems.
-- reusable: don't assume parameters and types for the handler, in this little framework -> C++ templates
-- object oriented, modern C++ constructs -> std::function, lambda, again C++ templates
-- type-safe -> again C++ templates
+- reusable: the library doesn't assume parameters and types for the handler.
+- object oriented, modern C++ constructs -> std::function, lambda, C++ templates, type traits.
+- type-safe
 - allow a classic C function, a lambda, a static class method or an object method as handler. 
 - pass handler arguments by value, by reference, as const
+- allow handlers that return void, bool, arithmetic, or an object.
 
 ### Blog:
 

@@ -133,6 +133,26 @@ int main() {
 	fflush(stdout);
 	}
 
+    { // scenario: return an object
+    class return_class {
+    public:
+        return_class() : value_(0) {};
+        int value_;
+    };
+
+	callbackmanager::Callback<return_class> cb;
+    // Use a lambda to execute anonymous C code
+    cb.set([]() -> return_class {
+        return_class rc;
+        rc.value_ = 1;
+        return rc;
+    });
+    return_class ret = cb();
+    printf("Value: %d\n", ret.value_ );
+	fflush(stdout);
+	}
+
+
 	/*
 	{ // scenario: use an unsupported (non-fundamental) type for return value R
 	  // this will generate a compile error
