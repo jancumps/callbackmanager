@@ -14,7 +14,7 @@
  namespace callbackmanager {
  
  export template <typename R, typename... Args>
-  requires std::is_void<R>::value || std::is_arithmetic_v<R>
+  requires std::is_void<R>::value || std::is_arithmetic_v<R> || std::is_class_v<R>
 class Callback {
 	using callbackfunction_t = std::function<R(Args...)>;	
 public:
@@ -40,21 +40,27 @@ public:
 	}
 
 	/*
-	 * R can either be an arithmetic type, or void
+	 * R can be an arithmetic type, an object, or void
 	 */
 	inline R operator()(Args... args) {
-		if constexpr (std::is_void<R>::value) {
+		if constexpr (std::is_void<R>::value) {  // void
 			if (!is_callback_set) {
 				return;
+			} else {
+				(callback_)(args...);
 			}
-			(callback_)(args...);
-		}
-
-		if constexpr (! std::is_void<R>::value) {
+		} else if constexpr (std::is_class<R>::value) { // object
+			if (!is_callback_set) {
+				return R();
+			} else {
+				return (callback_)(args...);
+			}
+		} else { // not void nor object
 			if (!is_callback_set) {
 				return 0; // R can only be a arithmetic type. 0 should work as default.
+			} else {
+				return (callback_)(args...);
 			}
-			return (callback_)(args...);
 		}
 	}
 

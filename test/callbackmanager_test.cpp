@@ -121,3 +121,23 @@ TEST(callback, setUnset) {
     cb.unset();
     ASSERT_FALSE(cb.is_set());
 }
+
+TEST(callback, object) {
+    class return_class {
+        public:
+            return_class() : value_(0) {};
+            int value_;
+    };
+    callbackmanager::Callback<return_class> cb;
+    // Use a lambda to execute anonymous C code
+    // validate if it works when no function set:
+    return_class ret = cb();
+    ASSERT_EQ(ret.value_, 0);
+    cb.set([]() -> return_class {
+        return_class rc;
+        rc.value_ = 1;
+        return rc;
+    });
+    ret = cb();
+    ASSERT_EQ(ret.value_, 1);
+}
