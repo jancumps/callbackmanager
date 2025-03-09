@@ -30,10 +30,19 @@ public:
 		is_callback_set = false;
 	}
 
+	[[deprecated("Use operator () instead.")]]
+	inline R call(Args... args) {
+		return *this(args...);
+	}
+
+	inline bool is_set() {
+		return is_callback_set;		
+	}
+
 	/*
 	 * R can either be an arithmetic type, or void
 	 */
-	inline R call(Args... args) {
+	inline R operator()(Args... args) {
 		if constexpr (std::is_void<R>::value) {
 			if (!is_callback_set) {
 				return;
@@ -47,10 +56,6 @@ public:
 			}
 			return (callback_)(args...);
 		}
-	}
-
-	inline bool is_set() {
-		return is_callback_set;		
 	}
 
 private:

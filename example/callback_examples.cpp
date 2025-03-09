@@ -35,7 +35,7 @@ int main() {
         return myClass.handler(num1, num2);
     });
 
-    int o = cb.call(a, b);
+    int o = cb(a, b);
     printf("Value: %i\n", o);
 	fflush(stdout);
 	}
@@ -47,7 +47,7 @@ int main() {
         return MyClass::staticHandler(num1, num2);
     });
 
-    int o = cb.call(a, b);
+    int o = cb(a, b);
     printf("Value: %i\n", o);
 	fflush(stdout);
 	}
@@ -59,7 +59,7 @@ int main() {
         return functionHandler(num1, num2);
     });
 
-    int o = cb.call(a, b);
+    int o = cb(a, b);
     printf("Value: %i\n", o);
 	fflush(stdout);
 	}
@@ -71,7 +71,7 @@ int main() {
         return num1 + num2;
     });
 
-    int o  = cb.call(a, b);
+    int o  = cb(a, b);
     printf("Value: %i\n", o);
 	fflush(stdout);
 	}
@@ -83,7 +83,7 @@ int main() {
         return num1 == num2;
     });
 
-    printf("Value: %s\n", cb.call(a, b) ? "true" : "false");
+    printf("Value: %s\n", cb(a, b) ? "true" : "false");
 	fflush(stdout);
 	}
 
@@ -95,7 +95,7 @@ int main() {
     	fflush(stdout);
         return;
     });
-    cb.call(a, b);
+    cb(a, b);
 	}
 
 	{ // scenario: use void, and no attributes
@@ -106,7 +106,7 @@ int main() {
     	fflush(stdout);
         return;
     });
-    cb.call();
+    cb();
 	}
 
 	{ // scenario: use void, and a const std::string reference
@@ -117,7 +117,7 @@ int main() {
     	fflush(stdout);
         return;
     });
-    cb.call("hello, world!\r\n");
+    cb("hello, world!\r\n");
 	}
 
 	{ // scenario: use void, and a const std::string reference
@@ -128,7 +128,7 @@ int main() {
     	s.assign("hello, world!\r\n");
         return;
     });
-    cb.call(updateme);
+    cb(updateme);
     printf("%s", updateme.c_str());
 	fflush(stdout);
 	}
