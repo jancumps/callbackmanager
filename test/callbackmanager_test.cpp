@@ -18,8 +18,8 @@ TEST(callback, objectMethod) {
     cb.set([&myClass](const int& num1, const int& num2) -> int {
         return myClass.handler(num1, num2);
     });    
-    ASSERT_EQ(cb.call(4, 5), 9);
-    ASSERT_NE(cb.call(4, 5), 8);
+    ASSERT_EQ(cb(4, 5), 9);
+    ASSERT_NE(cb(4, 5), 8);
 }
 
 // scenario: call static method
@@ -36,8 +36,8 @@ TEST(callback, classStaticMethod) {
     cb.set([](const int& num1, const int& num2) -> int {
         return MyClass::staticHandler(num1, num2);
     });
-    ASSERT_EQ(cb.call(4, 5), 9);
-    ASSERT_NE(cb.call(4, 5), 8);
+    ASSERT_EQ(cb(4, 5), 9);
+    ASSERT_NE(cb(4, 5), 8);
 }
 
 // scenario: call C function
@@ -51,8 +51,8 @@ TEST(callback, cFunction) {
     cb.set([](const int& num1, const int& num2) -> int {
         return functionHandler(num1, num2);
     });
-    ASSERT_EQ(cb.call(4, 5), 9);
-    ASSERT_NE(cb.call(4, 5), 8);
+    ASSERT_EQ(cb(4, 5), 9);
+    ASSERT_NE(cb(4, 5), 8);
 }
 
 // scenario: call pure lambda
@@ -62,8 +62,8 @@ TEST(callback, lambda) {
     cb.set([](const int& num1, const int& num2) -> int {
         return num1 + num2;
     });
-    ASSERT_EQ(cb.call(4, 5), 9);
-    ASSERT_NE(cb.call(4, 5), 8);
+    ASSERT_EQ(cb(4, 5), 9);
+    ASSERT_NE(cb(4, 5), 8);
 }
 
 // scenario: return a bool
@@ -73,8 +73,8 @@ TEST(callback, bool) {
     cb.set([](const int& num1, const int& num2) -> bool {
         return num1 == num2;
     });
-	ASSERT_TRUE(cb.call(1, 1));
-	ASSERT_FALSE(cb.call(1, 2));
+	ASSERT_TRUE(cb(1, 1));
+	ASSERT_FALSE(cb(1, 2));
 }
 
 // scenario: use void, and no attributes
@@ -86,7 +86,7 @@ TEST(callback, voidWithoutParameters) {
         called = true;
         return;
     });
-    cb.call();
+    cb();
     ASSERT_TRUE(called);
 }
 
@@ -98,14 +98,14 @@ TEST(callback, voidWithConstParameter) {
         ASSERT_STREQ(s.c_str(), "test");
         return;
     });
-    cb.call("test");
+    cb("test");
 }    
 
 // scenario: no handler
 TEST(callback, noHandler) {
 	callbackmanager::Callback<void> cb;
     ASSERT_FALSE(cb.is_set());
-    cb.call();
+    cb();
     ASSERT_TRUE(true); // call without callback should succeed
 }    
 
