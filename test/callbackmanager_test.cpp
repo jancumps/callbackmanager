@@ -141,3 +141,12 @@ TEST(callback, object) {
     ret = cb();
     ASSERT_EQ(ret.value_, 1);
 }
+
+TEST(callback, string) {
+    callbackmanager::Callback<std::string> cb;
+    // Use a lambda to execute anonymous C code
+    cb.set([]() -> std::string {
+        return "test";
+    });
+    ASSERT_STREQ(cb().c_str(), "test");
+}

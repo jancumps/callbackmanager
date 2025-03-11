@@ -151,14 +151,11 @@ int main() {
     printf("Value: %d\n", ret.value_ );
 	fflush(stdout);
 	}
-
-
-	/*
-	{ // scenario: use an unsupported (non-fundamental) type for return value R
-	  // this will generate a compile error
-    callbackmanager::Callback<std::string, const int&, const int&> cb;
-	}
-*/
+	
+	// { // scenario: use an unsupported (non-fundamental) type for return value R
+	//   // this will generate a compile error
+    // callbackmanager::Callback<char[], const int&, const int&> cb;
+	// }
 
 }
 
