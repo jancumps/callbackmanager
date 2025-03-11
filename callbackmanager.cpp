@@ -5,16 +5,23 @@
  *      Author: jancu
  */
 
- module;
+module;
 
- #include <functional>
- 
- export module callbackmanager;
- 
- namespace callbackmanager {
- 
- export template <typename R, typename... Args>
-  requires std::is_void<R>::value || std::is_arithmetic_v<R> || std::is_class_v<R>
+#include <concepts>
+#include <functional>
+
+export module callbackmanager;
+
+namespace callbackmanager {
+
+// concept guards what types of return values we can handle
+template<typename R>
+concept Callbackable = 
+	std::is_void<R>::value ||
+	std::is_arithmetic_v<R> ||
+	std::is_class_v<R>;
+
+export template <Callbackable R, typename... Args>
 class Callback {
 	using callbackfunction_t = std::function<R(Args...)>;	
 public:
