@@ -9,6 +9,7 @@ module;
 
 #include <concepts>
 #include <functional>
+#include <new>
 
 export module callbackmanager;
 
