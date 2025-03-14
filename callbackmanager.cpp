@@ -26,8 +26,10 @@ class Callback {
 	using callbackfunction_t = std::function<R(Args...)>;	
 public:
 	Callback() : callback_(nullptr), is_callback_set(false){}
+	Callback(callbackfunction_t&& callback) : 
+		callback_(callback), is_callback_set(true){}
 
-	inline void set(callbackfunction_t callback) {
+	inline void set(callbackfunction_t&& callback) {
 	    callback_ = callback;
 		is_callback_set = true;
 	}
