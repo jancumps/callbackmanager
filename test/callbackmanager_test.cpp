@@ -150,3 +150,11 @@ TEST(callback, string) {
     });
     ASSERT_STREQ(cb().c_str(), "test");
 }
+
+TEST(callback, constructor) { // scenario: constructor with lambda
+    callbackmanager::Callback<bool, const int&, const int&> cb(
+        [](const int& num1, const int& num2) -> bool {
+            return num1 == num2;
+    });
+    ASSERT_FALSE(cb(1, 2));     
+}  

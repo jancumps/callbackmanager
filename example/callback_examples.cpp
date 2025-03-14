@@ -151,6 +151,16 @@ int main() {
     printf("Value: %d\n", ret.value_ );
 	fflush(stdout);
 	}
+
+	{ // scenario: constructor with lambda
+    callbackmanager::Callback<bool, const int&, const int&> cb(
+        [](const int& num1, const int& num2) -> bool {
+            return num1 == num2;
+    });
+    
+    printf("Value: %s\n", cb(a, b) ? "true" : "false");
+    fflush(stdout);
+    }    
 	
 	// { // scenario: use an unsupported (non-fundamental) type for return value R
 	//   // this will generate a compile error
